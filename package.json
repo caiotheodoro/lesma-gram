@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@types/jest": "^29.5.12"
+  },
+  "dependencies": {
+    "pg": "^8.12.0"
   }
 }
