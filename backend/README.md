@@ -1,76 +1,38 @@
-## 🚀 Features
+# Node-Typescript
 
-- 📁 Modular Structure: Organized by feature for easy navigation and scalability.
-- 💨 Faster Execution with tsx: Rapid TypeScript execution with esbuild, complemented by tsc for type checking.
-- 🌐 Stable Node Environment: Latest LTS Node version in .nvmrc.
-- 🔧 Simplified Environment Variables with Envalid: Centralized and easy-to-manage configuration.
-- 🔗 Path Aliases: Cleaner code with shortcut imports.
-- 🔄 Dependabot Integration: Automatic updates for secure and up-to-date dependencies.
-- 🔒 Security: Helmet for HTTP header security and CORS setup.
-- 📊 Logging: Efficient logging with pino-http.
-- 🧪 Comprehensive Testing: Robust setup with Vitest and Supertest.
-- 🔑 Code Quality Assurance: Husky and lint-staged for consistent quality.
-- ✅ Unified Code Style: ESLint and Prettier for a consistent coding standard.
-- 📃 API Response Standardization: ServiceResponse class for consistent API responses.
-- 🐳 Docker Support: Ready for containerization and deployment.
-- 📝 Input Validation with Zod: Strongly typed request validation using Zod.
-- 🧩 API Spec Generation: Automated OpenAPI specification generation from Zod schemas to ensure up-to-date and accurate API documentation.
+## Steps to Initiate Typescript With Node
 
-## 🛠️ Getting Started
+### Step 1
+- Run `sudo npm i -g typescript` to install typescript globally.
+- Check typescripe version by running `tsc --version` to make sure you installed it correctly.
 
-### Step 1: 🚀 Initial Setup
+### Step 2
+- Create a file called app.ts `touch app.ts`
+- Write typescript code in it.
+- To compile it run `tsc app.ts`. It will generate actual Javascript file for app.js.
+- If you want to watch your ts file everytime when changes happen, run `tsc app.ts -w`.
 
-- Install dependencies: `npm ci`
+### Step 3
+- Create a typescript config file by running `tsc --init`. This will generate a tsconfig.json file with commented options.
+- Make the `"target"` to `es2016`
+- Uncomment `"outDir": "./"` and `"rootDir": "./"`.
+- Add `./dist` to outDir. `"outDir": "./dist"`: It will add the compiled js files into dist folder.
+- Add `./src` to rootDir. `"rootDir": "./src"`: It will specify the root directory of input files.
+- Make sure to uncomment the `"moduleResolution": "node"`
 
-### Step 2: ⚙️ Environment Configuration
+### Step 4
+- Now move the `app.ts` file into `src` folder.
+- Simple run `tsc` in project directory to automatically create `dist` folder and add the compiled version of `app.ts`.
 
-- Create `.env`: Copy `.env.template` to `.env`
-- Update `.env`: Fill in necessary environment variables
+### Step 5
+- Add package.json file by running `npm init -y`.
+- Install express: `npm i express`.
+- Run `npm i -D typescript ts-node nodemon  @types/node @types/express` to install typescript, ts-node, nodemon, types definition of node and express as Dev dependencies.
 
-### Step 3: 🏃‍♂️ Running the Project
-
-- Development Mode: `npm run dev`
-- Building: `npm run build`
-- Production Mode: Set `.env` to `NODE_ENV="production"` then `npm run build && npm run start`
-
-## 📁 Estrutura
-
-```
-.
-├── api
-│   ├── healthCheck
-│   │   ├── __tests__
-│   │   │   └── healthCheckRouter.test.ts
-│   │   └── healthCheckRouter.ts
-│   └── user
-│       ├── __tests__
-│       │   ├── userRouter.test.ts
-│       │   └── userService.test.ts
-│       ├── userModel.ts
-│       ├── userRepository.ts
-│       ├── userRouter.ts
-│       └── userService.ts
-├── api-docs
-│   ├── __tests__
-│   │   └── openAPIRouter.test.ts
-│   ├── openAPIDocumentGenerator.ts
-│   ├── openAPIResponseBuilders.ts
-│   └── openAPIRouter.ts
-├── common
-│   ├── __tests__
-│   │   ├── errorHandler.test.ts
-│   │   └── requestLogger.test.ts
-│   ├── middleware
-│   │   ├── errorHandler.ts
-│   │   ├── rateLimiter.ts
-│   │   └── requestLogger.ts
-│   ├── models
-│   │   └── serviceResponse.ts
-│   └── utils
-│       ├── commonValidation.ts
-│       ├── envConfig.ts
-│       └── httpHandlers.ts
-├── index.ts
-└── server.ts
+### Step 6
+Add Below as Scripts in package.json file
+ - `"start":"node dist/app.js",`
+ - `"dev": "nodemon src/app.ts",`
+ - `"build": "tsc -p ."`
 
 

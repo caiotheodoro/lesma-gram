@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  ipt120db:
+    image: postgres
+    container_name: ipt120db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/data/postgres
+volumes:
+  pgdata:
+    driver: local
