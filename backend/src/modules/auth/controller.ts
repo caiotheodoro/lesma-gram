@@ -21,7 +21,6 @@ export class AuthController {
     this.router.post("/", this.login);
   }
 
-
   login = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;

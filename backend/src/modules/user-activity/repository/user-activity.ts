@@ -4,7 +4,6 @@ import { UserActivityEntity } from "../../../@types/entities";
 import { UserActivityInterface } from "./user-activity.interface";
 import { GetActivitiesDTO } from "../dtos/get-user-activity.dto";
 
-
 export class UserActivityRepository implements UserActivityInterface {
   #pool: Pool;
 
@@ -70,4 +69,3 @@ export class UserActivityRepository implements UserActivityInterface {
     await this.#pool.query('DELETE FROM "user_activity" WHERE id = $1', [id]);
   }
 }
-
