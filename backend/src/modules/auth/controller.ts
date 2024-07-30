@@ -1,8 +1,10 @@
 import express, { Request, Response, Router } from "express";
 import { Pool } from "pg";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { UserRepository } from "../user/repository/user";
+
+
 
 export class AuthController {
   private router: Router;
@@ -23,25 +25,26 @@ export class AuthController {
     try {
       const { email, password } = req.body;
 
+      
       const user = await this.userRepository.getUserByEmail(email);
-
-      if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(400).json({ message: "Email ou senha Incorretos." });
+      
+      if(!user || !(await bcrypt.compare(password, user.password))){
+        res.status(400).json({ message: "Email ou senha Incorretos." });
       }
+   
+      
+      const access_token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
+        expiresIn: "24h",
+      });
 
-      const access_token = jwt.sign(
-        { id: user.id },
-        process.env.JWT_SECRET as string,
-        {
-          expiresIn: "24h",
-        },
-      );
 
-      return res.status(201).json({ access_token });
+      res.status(201).json({ access_token });
     } catch (error) {
-      return res.status(500).json({ message: "Erro Interno!" });
+      res.status(500).json({ message: "Erro Interno!" });
     }
   };
+
+  
 
   getRouter() {
     return this.router;
