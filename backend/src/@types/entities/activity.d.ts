@@ -1,7 +1,6 @@
 import { BaseEntity } from ".";
 
-export interface ActivityEntity  extends BaseEntity {
-  title: string;
-  description: string;
-  date: Date;
+export interface PostEntity extends BaseEntity {
+  content: string;
+  image: string;
 }

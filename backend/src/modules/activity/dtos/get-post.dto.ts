@@ -1,5 +1,5 @@
 import { PostEntity } from "../../../@types/entities";
 
-export interface GetPostDTO {
+export interface GetPostsDTO {
   posts: PostEntity[];
 }
