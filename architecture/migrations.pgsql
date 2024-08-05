@@ -3,14 +3,17 @@ CREATE TABLE users (
     name TEXT,
     email TEXT NOT NULL,
     email_verified DATE,
-    image TEXT
+    image TEXT,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 );
 
 CREATE TABLE posts (
-    id TEXT PRIMARY KEY DEFAULT generate_uuid(), 
+    id TEXT PRIMARY KEY DEFAULT generate_uuid(),
     content TEXT NOT NULL,
     image TEXT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -27,6 +30,8 @@ CREATE TABLE accounts (
     scope TEXT,
     id_token TEXT,
     session_state TEXT,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (provider, provider_account_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -35,6 +40,8 @@ CREATE TABLE likes (
     id TEXT PRIMARY KEY DEFAULT generate_uuid(),
     post_id TEXT NOT NULL,
     user_id TEXT NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
