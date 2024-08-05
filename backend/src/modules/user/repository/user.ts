@@ -3,7 +3,6 @@ import { CreateUserDTO, UpdateUserDTO } from "../dtos";
 import { UserEntity } from "../../../@types/entities";
 import { UserInterface } from "./user.interface";
 
-
 export class UserRepository implements UserInterface {
   #pool: Pool;
 
@@ -12,7 +11,9 @@ export class UserRepository implements UserInterface {
   }
 
   async getUsers(): Promise<UserEntity[]> {
-    const response = await this.#pool.query('SELECT (id,name,email) FROM "user"  ORDER BY id ASC');
+    const response = await this.#pool.query(
+      'SELECT (id,name,email) FROM "user"  ORDER BY id ASC',
+    );
 
     const formatttedResponse = response.rows.map((row) => {
       const formattedRow = row.row
@@ -37,17 +38,19 @@ export class UserRepository implements UserInterface {
     );
   }
 
-  async getUserById(id:string): Promise<UserEntity> {
-    const response = await this.#pool.query('SELECT * FROM "user" WHERE id = $1', [
-      id,
-    ]);
+  async getUserById(id: string): Promise<UserEntity> {
+    const response = await this.#pool.query(
+      'SELECT * FROM "user" WHERE id = $1',
+      [id],
+    );
     return response.rows[0];
   }
 
-  async getUserByEmail(email:string): Promise<UserEntity> {
-    const response = await this.#pool.query('SELECT * FROM "user" WHERE email = $1', [
-      email,
-    ]);
+  async getUserByEmail(email: string): Promise<UserEntity> {
+    const response = await this.#pool.query(
+      'SELECT * FROM "user" WHERE email = $1',
+      [email],
+    );
     return response.rows[0];
   }
 
@@ -58,10 +61,7 @@ export class UserRepository implements UserInterface {
     );
   }
 
-  async deleteUser(id:string) {
-    await this.#pool.query('DELETE FROM "user_activity" WHERE userId = $1', [
-      id,
-    ]);
+  async deleteUser(id: string) {
     await this.#pool.query('DELETE FROM "user" WHERE id = $1', [id]);
   }
 }

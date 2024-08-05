@@ -1,6 +1,4 @@
-
-export interface UpdateActivityDTO {
-
+export interface UpdatePostDTO {
   id: string;
   title: string;
   description: string;
