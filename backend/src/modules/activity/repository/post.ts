@@ -17,10 +17,10 @@ export class PostRepository implements PostInterface {
     return response.rows;
   }
 
-  async createPost({ title, description, date }: CreatePostDTO): Promise<void> {
+  async createPost({ content, image }: CreatePostDTO): Promise<void> {
     await this.#pool.query(
-      'INSERT INTO "post" (title, description, date) VALUES ($1, $2, $3)',
-      [title, description, date],
+      'INSERT INTO "post" (content, image, createdAt) VALUES ($1, $2, $3)',
+      [content, image, new Date().toISOString()],
     );
   }
 
@@ -32,10 +32,10 @@ export class PostRepository implements PostInterface {
     return response.rows[0];
   }
 
-  async updatePost({ id, title, description, date }: UpdatePostDTO) {
+  async updatePost({ id, content, image }: UpdatePostDTO) {
     await this.#pool.query(
-      `UPDATE "post" SET title = $1, description = $2, date = $3 WHERE id = $4`,
-      [title, description, date, id],
+      `UPDATE "post" SET content = $1, image = $2, updatedAt = $3 WHERE id = $4`,
+      [content, image, new Date().toISOString(), id],
     );
   }
 

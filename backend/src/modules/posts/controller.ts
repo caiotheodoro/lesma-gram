@@ -32,8 +32,8 @@ export class PostController {
 
   create = async (req: Request, res: Response) => {
     try {
-      const { title, description, date } = req.body;
-      const createPostDTO: CreatePostDTO = { title, description, date };
+      const { content, image } = req.body;
+      const createPostDTO: CreatePostDTO = { content, image };
       await this.postRepository.createPost(createPostDTO);
       res.status(201).json({ message: "Atividade Criada com sucesso" });
     } catch (error) {
@@ -58,8 +58,8 @@ export class PostController {
   update = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { title, description, date } = req.body;
-      const updatePostDTO: UpdatePostDTO = { id, title, description, date };
+      const { content, image, date } = req.body;
+      const updatePostDTO: UpdatePostDTO = { id, content, image };
       await this.postRepository.updatePost(updatePostDTO);
       res.json({ message: "Atividade Atualizada com sucesso" });
     } catch (error) {
