@@ -10,7 +10,7 @@ export class PostRepository implements PostInterface {
     this.#pool = pool;
   }
 
-  async getActivities(): Promise<PostEntity[]> {
+  async getPosts(): Promise<PostEntity[]> {
     const response = await this.#pool.query(
       'SELECT * FROM "posts" ORDER BY id ASC',
     );

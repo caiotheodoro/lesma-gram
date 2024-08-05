@@ -1,10 +1,10 @@
-import { ActivityEntity } from "../../../@types/entities";
-import { CreateActivityDTO, UpdateActivityDTO } from "../dtos";
+import { PostEntity } from "../../../@types/entities";
+import { CreatePostDTO, UpdatePostDTO } from "../dtos";
 
-export interface ActivityInterface {
-  getActivities(): Promise<ActivityEntity[]>;
-  getActivityById(id: string): Promise<ActivityEntity>;
-  createActivity(data: CreateActivityDTO): Promise<void>;
-  updateActivity(data: UpdateActivityDTO): Promise<void>;
-  deleteActivity(id: string): Promise<void>;
+export interface PostInterface {
+  getPosts(): Promise<PostEntity[]>;
+  getPostById(id: string): Promise<PostEntity>;
+  createPost(data: CreatePostDTO): Promise<void>;
+  updatePost(data: UpdatePostDTO): Promise<void>;
+  deletePost(id: string): Promise<void>;
 }

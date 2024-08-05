@@ -23,7 +23,7 @@ export class PostController {
 
   getAll = async (req: Request, res: Response) => {
     try {
-      const posts = await this.postRepository.getActivities();
+      const posts = await this.postRepository.getPosts();
       res.json(posts);
     } catch (error) {
       res.status(500).json({ message: "Erro Interno!" });

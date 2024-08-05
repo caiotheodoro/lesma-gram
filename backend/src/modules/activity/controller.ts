@@ -1,15 +1,15 @@
 import express, { Request, Response, Router } from "express";
 import { Pool } from "pg";
-import { ActivityRepository } from "./repository/activity";
-import { CreateActivityDTO, UpdateActivityDTO } from "./dtos";
+import { PostRepository } from "./repository/activity";
+import { CreatePostDTO, UpdatePostDTO } from "./dtos";
 
-export class ActivityController {
+export class PostController {
   private router: Router;
-  private activityRepository: ActivityRepository;
+  private activityRepository: PostRepository;
 
   constructor(pool: Pool) {
     this.router = express.Router();
-    this.activityRepository = new ActivityRepository(pool);
+    this.activityRepository = new PostRepository(pool);
     this.initializeRoutes();
   }
 
@@ -23,10 +23,9 @@ export class ActivityController {
 
   getAll = async (req: Request, res: Response) => {
     try {
-      const activities = await this.activityRepository.getActivities();
+      const activities = await this.activityRepository.getPosts();
       res.json(activities);
     } catch (error) {
-      
       res.status(500).json({ message: "Erro Interno!" });
     }
   };
@@ -34,11 +33,10 @@ export class ActivityController {
   create = async (req: Request, res: Response) => {
     try {
       const { title, description, date } = req.body;
-      const createActivityDTO: CreateActivityDTO = { title, description, date };
-      await this.activityRepository.createActivity(createActivityDTO);
+      const createPostDTO: CreatePostDTO = { title, description, date };
+      await this.activityRepository.createPost(createPostDTO);
       res.status(201).json({ message: "Atividade Criada com sucesso" });
     } catch (error) {
-      
       res.status(500).json({ message: "Erro Interno!" });
     }
   };
@@ -46,14 +44,13 @@ export class ActivityController {
   getById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const activity = await this.activityRepository.getActivityById(id);
+      const activity = await this.activityRepository.getPostById(id);
       if (!activity) {
         res.status(404).json({ message: "Atividade nao encontrada" });
       } else {
         res.json(activity);
       }
     } catch (error) {
-      
       res.status(500).json({ message: "Erro Interno!" });
     }
   };
@@ -62,11 +59,15 @@ export class ActivityController {
     try {
       const { id } = req.params;
       const { title, description, date } = req.body;
-      const updateActivityDTO: UpdateActivityDTO = { id, title, description, date };
-      await this.activityRepository.updateActivity(updateActivityDTO);
+      const updatePostDTO: UpdatePostDTO = {
+        id,
+        title,
+        description,
+        date,
+      };
+      await this.activityRepository.updatePost(updatePostDTO);
       res.json({ message: "Atividade Atualizada com sucesso" });
     } catch (error) {
-      
       res.status(500).json({ message: "Erro Interno!" });
     }
   };
@@ -74,10 +75,9 @@ export class ActivityController {
   delete = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      await this.activityRepository.deleteActivity(id);
+      await this.activityRepository.deletePost(id);
       res.json({ message: "Atividade Deletada com sucesso" });
     } catch (error) {
-      
       res.status(500).json({ message: "Erro Interno!" });
     }
   };

@@ -14,7 +14,7 @@ const postsController = new PostController(pool);
 const authController = new AuthController(pool);
 
 app.use("/users", authMiddleware, userController.getRouter());
-app.use("/posts", authMiddleware, postsController.getRouter());
+app.use("/posts", /*authMiddleware,*/ postsController.getRouter());
 app.use("/auth", authController.getRouter());
 
 app.listen(3025, () => {

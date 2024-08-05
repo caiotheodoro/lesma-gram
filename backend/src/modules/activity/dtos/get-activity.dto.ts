@@ -1,5 +1,5 @@
-import { ActivityEntity } from "../../../@types/entities";
+import { PostEntity } from "../../../@types/entities";
 
-export interface GetActivitiesDTO {
-  activities: ActivityEntity[];
+export interface GetPostsDTO {
+  activities: PostEntity[];
 }

@@ -2,7 +2,7 @@ import { PostEntity } from "../../../@types/entities";
 import { CreatePostDTO, UpdatePostDTO } from "../dtos";
 
 export interface PostInterface {
-  getActivities(): Promise<PostEntity[]>;
+  getPosts(): Promise<PostEntity[]>;
   getPostById(id: string): Promise<PostEntity>;
   createPost(data: CreatePostDTO): Promise<void>;
   updatePost(data: UpdatePostDTO): Promise<void>;
