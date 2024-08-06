@@ -26,6 +26,7 @@ export class PostController {
       const posts = await this.postRepository.getPosts();
       res.json(posts);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Erro Interno!" });
     }
   };
@@ -37,6 +38,7 @@ export class PostController {
       await this.postRepository.createPost(createPostDTO);
       res.status(201).json({ message: "Atividade Criada com sucesso" });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Erro Interno!" });
     }
   };

@@ -12,15 +12,16 @@ export class PostRepository implements PostInterface {
 
   async getPosts(): Promise<PostEntity[]> {
     const response = await this.#pool.query(
-      'SELECT * FROM "posts" ORDER BY id ASC LEFT JOIN "users" ON "posts".user_id = "users".id',
+      'SELECT * FROM "posts" ORDER BY id ASC ',
+      //LEFT JOIN "users" ON "posts".userId = "users".id
     );
     return response.rows;
   }
 
   async createPost({ content, image }: CreatePostDTO): Promise<void> {
     await this.#pool.query(
-      'INSERT INTO "posts" (content, image, createdAt) VALUES ($1, $2, $3)',
-      [content, image, new Date().toISOString()],
+      'INSERT INTO "posts" (content, image) VALUES ($1, $2)',
+      [content, image],
     );
   }
 
@@ -34,8 +35,8 @@ export class PostRepository implements PostInterface {
 
   async updatePost({ id, content, image }: UpdatePostDTO) {
     await this.#pool.query(
-      `UPDATE "posts" SET content = $1, image = $2, createdAt = $3 WHERE id = $4`,
-      [content, image, new Date().toISOString(), id],
+      `UPDATE "posts" SET content = $1, image = $2 WHERE id = $3`,
+      [content, image, id],
     );
   }
 
