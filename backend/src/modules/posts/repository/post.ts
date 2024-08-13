@@ -12,7 +12,7 @@ export class PostRepository implements PostInterface {
 
   async getPosts(): Promise<PostEntity[]> {
     const response = await this.#pool.query(
-      'SELECT * FROM "posts" ORDER BY id ASC LEFT JOIN "users" ON "posts".user_id = "users".id',
+      'SELECT posts.*, COUNT(likes.id) AS likes_count FROM "posts" LEFT JOIN "likes" ON "posts".id = "likes".post_id GROUP BY posts.id ORDER BY posts.id ASC',
     );
     return response.rows;
   }
