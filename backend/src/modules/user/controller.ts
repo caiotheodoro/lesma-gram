@@ -4,6 +4,7 @@ import { UserRepository } from "./repository/user";
 import { CreateUserDTO, UpdateUserDTO } from "./dtos";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import { authMiddleware } from "../../middlewares/auth";
 
 dotenv.config();
 
@@ -18,11 +19,11 @@ export class UserController {
   }
 
   private initializeRoutes() {
-    this.router.get("/", this.getAll);
+    this.router.get("/",authMiddleware, this.getAll);
     this.router.post("/", this.create);
-    this.router.get("/:id", this.getById);
-    this.router.put("/:id", this.update);
-    this.router.delete("/:id", this.delete);
+    this.router.get("/:id",authMiddleware, this.getById);
+    this.router.put("/:id",authMiddleware, this.update);
+    this.router.delete("/:id",authMiddleware, this.delete);
   }
 
   getAll = async (req: Request, res: Response) => {
