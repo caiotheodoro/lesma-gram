@@ -1,47 +1,44 @@
+
 CREATE TABLE users (
-    id TEXT PRIMARY KEY,
+    id TEXT PRIMARY KEY  DEFAULT gen_random_uuid(),
     name TEXT,
     email TEXT NOT NULL,
-    email_verified DATE,
-    image TEXT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE posts (
-    id TEXT PRIMARY KEY DEFAULT generate_uuid(),
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid(),
     content TEXT NOT NULL,
     image TEXT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    user_id TEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "userId" TEXT,
+    FOREIGN KEY ("userId") REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE accounts (
-    user_id TEXT NOT NULL,
-    type TEXT NOT NULL,
-    provider TEXT NOT NULL,
-    provider_account_id TEXT NOT NULL,
-    refresh_token TEXT,
-    access_token TEXT,
-    expires_at INTEGER,
-    token_type TEXT,
-    scope TEXT,
-    id_token TEXT,
-    session_state TEXT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (provider, provider_account_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
+
 
 CREATE TABLE likes (
-    id TEXT PRIMARY KEY DEFAULT generate_uuid(),
-    post_id TEXT NOT NULL,
-    user_id TEXT NOT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid(),
+    "postId" TEXT NOT NULL,
+    "userId" TEXT ,
+    "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY ("postId") REFERENCES posts(id) ON DELETE CASCADE,
+    FOREIGN KEY ("userId") REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE user_settings (
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid(),
+    "userId" TEXT NOT NULL,
+    "isAnonymous" BOOLEAN DEFAULT FALSE,
+    "showPicture" BOOLEAN DEFAULT TRUE,
+    "storyPosts" BOOLEAN DEFAULT FALSE,
+    "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY ("userId") REFERENCES users(id) ON DELETE CASCADE
+);
+
+
+INSERT INTO "posts" values ('sdsd','https://fastly.picsum.photos/id/34/200/300.jpg?hmac=K076uH4zC5xneqvhRayjS90G00xjPsR7eL_ShGEr6rs')

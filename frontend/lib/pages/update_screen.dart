@@ -8,7 +8,9 @@ class UpdateScreenPage extends StatefulWidget {
   final PostModel post;
   final void Function() refreshFn;
 
-  const UpdateScreenPage({required this.post, required this.refreshFn, Key? key}) : super(key: key);
+  const UpdateScreenPage(
+      {required this.post, required this.refreshFn, Key? key})
+      : super(key: key);
 
   @override
   _UpdateScreenPageState createState() => _UpdateScreenPageState();
@@ -86,7 +88,11 @@ class _UpdateScreenPageState extends State<UpdateScreenPage> {
                   onPressed: () {
                     bloc.add(
                       PostsUpdateEvent(
-                        PostModel(id: int.parse(idController.text), content: contentController.text, image: imageController.text, userId: 1),
+                        PostModel(
+                            id: idController.text,
+                            content: contentController.text,
+                            image: imageController.text,
+                            userId: 1),
                       ),
                     );
                   },

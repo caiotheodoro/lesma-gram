@@ -75,7 +75,11 @@ class _CreateScreenPageState extends State<CreateScreenPage> {
                   onPressed: () {
                     bloc.add(
                       PostsCreateEvent(
-                        PostModel(id: 0, content: contentController.text, image: imageController.text, userId: 1),
+                        PostModel(
+                            id: null,
+                            content: contentController.text,
+                            image: imageController.text,
+                            userId: 1),
                       ),
                     );
                   },
