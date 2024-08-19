@@ -6,5 +6,5 @@ export interface LikeInterface {
   getLikeById(id: string): Promise<LikeEntity>;
   createLike(data: CreateLikeDTO): Promise<void>;
   updateLike(data: UpdateLikeDTO): Promise<void>;
-  deleteLike(id: string): Promise<void>;
+  deleteLike(postId: string, userId: string): Promise<void>;
 }
