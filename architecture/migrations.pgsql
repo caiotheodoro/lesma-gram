@@ -3,6 +3,7 @@ CREATE TABLE users (
     id TEXT PRIMARY KEY  DEFAULT gen_random_uuid(),
     name TEXT,
     email TEXT NOT NULL,
+    password TEXT NOT NULL,
     "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

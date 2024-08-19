@@ -22,7 +22,7 @@ const likesController = new LikeController(pool);
 const authController = new AuthController(pool);
 
 app.use("/users", userController.getRouter());
-app.use("/posts", authMiddleware,postsController.getRouter());
+app.use("/posts", authMiddleware, postsController.getRouter());
 app.use("/likes", /*authMiddleware,*/ likesController.getRouter());
 app.use("/auth", authController.getRouter());
 

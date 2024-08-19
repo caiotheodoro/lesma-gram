@@ -14,16 +14,19 @@ export class PostController {
   }
 
   private initializeRoutes() {
-    this.router.get("/", this.getAll);
-    this.router.post("/", this.create);
+    this.router.get("/listar/:idUser", this.getAll);
+    this.router.get("/liked/:idUser", this.getByUserLiked);
+    this.router.post("/:idUser", this.create);
     this.router.get("/:id", this.getById);
+    this.router.get("/user/:idUser", this.getByUser);
     this.router.put("/:id", this.update);
     this.router.delete("/:id", this.delete);
   }
 
   getAll = async (req: Request, res: Response) => {
     try {
-      const posts = await this.postRepository.getPosts();
+      const { idUser } = req.params;
+      const posts = await this.postRepository.getPosts(idUser);
       res.json(posts);
     } catch (error) {
       console.log(error);
@@ -31,10 +34,21 @@ export class PostController {
     }
   };
 
+  getByUserLiked = async (req: Request, res: Response) => {
+    try {
+      const { idUser } = req.params;
+      const posts = await this.postRepository.getPostsByUserLiked(idUser);
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ message: "Erro Interno!" });
+    }
+  };
+
   create = async (req: Request, res: Response) => {
     try {
+      const { idUser } = req.params;
       const { content, image } = req.body;
-      const createPostDTO: CreatePostDTO = { content, image };
+      const createPostDTO: CreatePostDTO = { content, image, idUser };
       await this.postRepository.createPost(createPostDTO);
       res.status(201).json({ message: "Atividade Criada com sucesso" });
     } catch (error) {
@@ -74,6 +88,16 @@ export class PostController {
       const { id } = req.params;
       await this.postRepository.deletePost(id);
       res.json({ message: "Atividade Deletada com sucesso" });
+    } catch (error) {
+      res.status(500).json({ message: "Erro Interno!" });
+    }
+  };
+
+  getByUser = async (req: Request, res: Response) => {
+    try {
+      const { idUser } = req.params;
+      const posts = await this.postRepository.getPostsByUsuario(idUser);
+      res.json(posts);
     } catch (error) {
       res.status(500).json({ message: "Erro Interno!" });
     }
