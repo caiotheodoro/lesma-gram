@@ -30,9 +30,9 @@ export class AuthController {
       
       if(!user || !(await bcrypt.compare(password, user.password))){
         res.status(400).json({ message: "Email ou senha Incorretos." });
+        return;
       }
    
-      
       const access_token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, {
         expiresIn: "24h",
       });

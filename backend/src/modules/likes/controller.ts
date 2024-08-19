@@ -18,7 +18,7 @@ export class LikeController {
     this.router.post("/", this.create);
     this.router.get("/:id", this.getById);
     this.router.put("/:id", this.update);
-    this.router.delete("/:id", this.delete);
+    this.router.delete("/:postId/:userId", this.delete);
   }
 
   getAll = async (req: Request, res: Response) => {
@@ -32,7 +32,7 @@ export class LikeController {
 
   create = async (req: Request, res: Response) => {
     try {
-      const { postId,userId } = req.body;
+      const { postId, userId } = req.body;
       const createLikeDTO: CreateLikeDTO = { postId, userId };
       await this.postRepository.createLike(createLikeDTO);
       res.status(201).json({ message: "Atividade Criada com sucesso" });
@@ -58,7 +58,7 @@ export class LikeController {
   update = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const {  postId,userId } = req.body;
+      const { postId, userId } = req.body;
       const updateLikeDTO: UpdateLikeDTO = { id, postId, userId };
       await this.postRepository.updateLike(updateLikeDTO);
       res.json({ message: "Atividade Atualizada com sucesso" });
@@ -69,8 +69,8 @@ export class LikeController {
 
   delete = async (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
-      await this.postRepository.deleteLike(id);
+      const { postId, userId } = req.params;
+      await this.postRepository.deleteLike(postId, userId);
       res.json({ message: "Atividade Deletada com sucesso" });
     } catch (error) {
       res.status(500).json({ message: "Erro Interno!" });

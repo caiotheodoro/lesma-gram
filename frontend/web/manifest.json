@@ -1,11 +1,11 @@
 {
-    "name": "frontend",
-    "short_name": "frontend",
+    "name": "insta_clone_firebase",
+    "short_name": "insta_clone_firebase",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Teste",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

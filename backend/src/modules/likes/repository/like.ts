@@ -19,7 +19,7 @@ export class LikeRepository implements LikeInterface {
 
   async createLike({ postId,userId }: CreateLikeDTO): Promise<void> {
     await this.#pool.query(
-      'INSERT INTO "likes" (postId, userId) VALUES ($1, $2)',
+      'INSERT INTO "likes" ("postId", "userId") VALUES ($1, $2)',
       [postId, userId],
     );
   }
@@ -39,7 +39,7 @@ export class LikeRepository implements LikeInterface {
     );
   }
 
-  async deleteLike(id: string) {
-    await this.#pool.query('DELETE FROM "likes" WHERE id = $1', [id]);
+  async deleteLike(postId: string, userId: string) {
+      await this.#pool.query('DELETE FROM "likes" WHERE "postId" = $1 AND "userId" = $2', [postId, userId]);
   }
 }
