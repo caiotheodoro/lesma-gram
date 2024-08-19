@@ -6,6 +6,7 @@ class PostWithUser {
   final String userId;
   final String name;
   final bool isLiked;
+  final bool isAnonymous;
 
   PostWithUser({
     required this.postId,
@@ -14,6 +15,7 @@ class PostWithUser {
     required this.createdAt,
     required this.userId,
     required this.name,
+    this.isAnonymous = false,
     this.isLiked = false,
   });
 
@@ -24,6 +26,7 @@ class PostWithUser {
       image: json['image'],
       createdAt: DateTime.parse(json['createdAt']),
       userId: json['userId'],
+      isAnonymous: json['isAnonymous'],
       name: json['name'],
       isLiked: json['isLiked'],
     );

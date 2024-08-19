@@ -93,6 +93,7 @@ class _FeedScreenState extends State<FeedScreen> {
               itemCount: posts.length,
               itemBuilder: (ctx, index) {
                 final data = posts[index];
+               
                 return Container(
                   margin: EdgeInsets.symmetric(
                     horizontal: width > webScreenSize ? width * 0.3 : 0,

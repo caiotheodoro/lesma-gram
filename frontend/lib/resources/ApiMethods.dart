@@ -57,6 +57,8 @@ class ApiMethods {
         List<dynamic> jsonData = jsonDecode(response.body);
         List<PostWithUser> posts =
             jsonData.map((data) => PostWithUser.fromJson(data)).toList();
+
+            print(posts);
         return posts;
       } else {
         throw Exception("Failed to get posts");

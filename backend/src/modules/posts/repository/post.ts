@@ -18,11 +18,13 @@ export class PostRepository implements PostInterface {
       'posts.image, ' +
       'posts."createdAt" AS "createdAt", ' +
       'users.id AS "userId", ' +
+      'user_settings."isAnonymous" AS "isAnonymous", ' +
       'users.name AS name, ' +
       'CASE WHEN likes.id IS NOT NULL THEN true ELSE false END AS "isLiked" ' +
       'FROM posts ' +
       'JOIN users ON posts."userId" = users.id ' +
       'LEFT JOIN likes ON posts.id = likes."postId" AND likes."userId" = $1 ' +
+      'LEFT JOIN "user_settings" ON "user_settings"."userId" = users.id ' +
       'ORDER BY posts."createdAt" DESC',
       [idUser]
     );

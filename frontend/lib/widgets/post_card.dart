@@ -93,7 +93,7 @@ class _PostCardState extends State<PostCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          widget.data.name,
+                         !widget.data.isAnonymous ? widget.data.name : "Usuario Anónimo",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
