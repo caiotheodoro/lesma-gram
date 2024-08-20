@@ -168,7 +168,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                           errorBuilder:
                                               (context, error, stackTrace) {
                                             return const Center(
-                                              child: Text('No image selected'),
+                                              child: Text('Nenhuma imagem selecionada.'),
                                             );
                                           },
                                         ),
@@ -178,7 +178,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                                 );
                               },
                             )
-                          : const Text('No image selected'),
+                          : const Text('Nenhuma imagem selecionada.'),
                     ],
                   ),
                 ),

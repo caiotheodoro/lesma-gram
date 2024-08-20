@@ -84,7 +84,7 @@ class _LikesScreenState extends State<LikesScreen> {
                 snapshot.data == null ||
                 snapshot.data!.isEmpty) {
               return const Center(
-                child: Text('No liked posts available.'),
+                child: Text('Você ainda não curtiu nenhum post.'),
               );
             }
 

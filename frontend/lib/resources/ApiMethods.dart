@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:frontend/models/PostWithUser.dart';
 import 'package:frontend/models/User.dart';
 import 'package:frontend/models/UserSetting.dart';
@@ -7,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:uuid/uuid.dart';
-import 'package:frontend/resources/StorageMethods.dart';
 import 'package:frontend/models/Post.dart';
 
 class ApiMethods {

@@ -89,10 +89,12 @@ class _FeedScreenState extends State<FeedScreen> {
             }
 
             final posts = snapshot.data!;
+
             return ListView.builder(
               itemCount: posts.length,
               itemBuilder: (ctx, index) {
                 final data = posts[index];
+                print(data.isLiked);
                 return Container(
                   margin: EdgeInsets.symmetric(
                     horizontal: width > webScreenSize ? width * 0.3 : 0,
