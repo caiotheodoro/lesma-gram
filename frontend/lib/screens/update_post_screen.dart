@@ -5,6 +5,7 @@ import 'package:frontend/resources/ApiMethods.dart';
 import 'package:frontend/resources/AuthMethods.dart';
 import 'package:frontend/responsive/responsive_layout_screen.dart';
 import 'package:frontend/screens/feed_screen.dart';
+import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/utils/colors.dart';
 import 'package:frontend/utils/utils.dart';
 import 'package:frontend/widgets/follow_button.dart';
@@ -79,6 +80,18 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Post editado com sucesso')),
       );
+
+      Future.delayed(Duration(seconds: 1), () {
+        Navigator.of(context).pop();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(
+              id: Future.value(userId!),
+            ),
+          ),
+        );
+      });
     } else {
       setState(() {
         isLoading = false;

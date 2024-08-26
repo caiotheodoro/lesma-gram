@@ -21,7 +21,7 @@ class _LikesScreenState extends State<LikesScreen> {
   @override
   void initState() {
     super.initState();
-    _likedPostsFuture = Future.value([]); // Initialize with an empty list
+    _likedPostsFuture = Future.value([]); 
     fetchLikedPosts();
   }
 
@@ -100,6 +100,7 @@ class _LikesScreenState extends State<LikesScreen> {
                   ),
                   child: PostCard(
                     data: data,
+                    onPostDeleted: _refreshLikedPosts,
                   ),
                 );
               },

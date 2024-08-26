@@ -117,6 +117,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Post criado com sucesso')),
       );
+
+      Future.delayed(Duration(seconds: 1), () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
+            ),
+          ),
+        );
+      });
     } else {
       setState(() {
         isLoading = false;
