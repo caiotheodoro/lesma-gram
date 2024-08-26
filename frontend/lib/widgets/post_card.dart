@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/PostWithUser.dart';
 import 'package:frontend/resources/ApiMethods.dart';
+import 'package:frontend/resources/AuthMethods.dart';
 import 'package:frontend/utils/colors.dart';
 import 'package:frontend/utils/globals.dart';
 import 'package:frontend/utils/utils.dart';
@@ -19,11 +20,18 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   bool isLiked = false;
+  String? authUserId;
 
   @override
   void initState() {
     super.initState();
+    fetchData();
     isLiked = widget.data.isLiked;
+  }
+
+  Future<void> fetchData() async {
+    authUserId = await AuthMethods().getIdUserAuth();
+    setState(() {});
   }
 
   deletePost(String postId) async {
@@ -40,9 +48,9 @@ class _PostCardState extends State<PostCard> {
   likePost() async {
     try {
       if (isLiked) {
-        await ApiMethods().deleteLikePost(widget.data.postId, widget.data.userId);
+        await ApiMethods().deleteLikePost(widget.data.postId, authUserId!);
       } else {
-        await ApiMethods().likePost(widget.data.postId, widget.data.userId);
+        await ApiMethods().likePost(widget.data.postId, authUserId!);
       }
       setState(() {
         isLiked = !isLiked;

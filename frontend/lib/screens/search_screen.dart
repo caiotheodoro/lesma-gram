@@ -40,7 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: TextFormField(
             controller: searchController,
             decoration: const InputDecoration(
-              hintText: 'Search for users',
+              hintText: 'Buscar usuário...',
             ),
             onFieldSubmitted: (String query) async {
               try {
@@ -117,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 }
               },
             )
-          : const Center(child: Text('Search for users')),
+          : const Center(child: Text('Nenhum usuário encontrado.')),
     );
   }
 }

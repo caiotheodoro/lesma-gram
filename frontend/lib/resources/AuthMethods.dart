@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import 'package:flutter/widgets.dart';
 import 'package:frontend/utils/api.dart';
 import 'package:http/http.dart' as http;
 import 'package:frontend/models/User.dart';
-import 'package:frontend/resources/StorageMethods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthMethods {
