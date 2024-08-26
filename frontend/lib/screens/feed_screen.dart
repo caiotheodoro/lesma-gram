@@ -21,7 +21,7 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   void initState() {
     super.initState();
-    _postsFuture = Future.value([]); // Initialize with an empty list
+    _postsFuture = Future.value([]);
     fetchData();
   }
 
@@ -32,6 +32,12 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 
   Future<void> _refreshPosts() async {
+    setState(() {
+      _postsFuture = ApiMethods().getPosts(authUserId!);
+    });
+  }
+
+  void _reloadAfterDeletion() {
     setState(() {
       _postsFuture = ApiMethods().getPosts(authUserId!);
     });
@@ -102,6 +108,7 @@ class _FeedScreenState extends State<FeedScreen> {
                   ),
                   child: PostCard(
                     data: data,
+                    onPostDeleted: _reloadAfterDeletion,
                   ),
                 );
               },

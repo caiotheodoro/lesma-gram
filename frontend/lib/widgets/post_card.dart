@@ -9,9 +9,11 @@ import 'package:intl/intl.dart';
 
 class PostCard extends StatefulWidget {
   final PostWithUser data;
+  final VoidCallback onPostDeleted;
 
   const PostCard({
     required this.data,
+    required this.onPostDeleted,
   });
 
   @override
@@ -37,6 +39,7 @@ class _PostCardState extends State<PostCard> {
   deletePost(String postId) async {
     try {
       await ApiMethods().deletePost(postId);
+      widget.onPostDeleted();
     } catch (err) {
       showSnackBar(
         err.toString(),
@@ -79,7 +82,6 @@ class _PostCardState extends State<PostCard> {
       ),
       child: Column(
         children: [
-          // HEADER SECTION OF THE POST
           Container(
             padding: const EdgeInsets.symmetric(
               vertical: 4,
@@ -134,7 +136,6 @@ class _PostCardState extends State<PostCard> {
                                           deletePost(
                                             widget.data.postId.toString(),
                                           );
-                                          // remove the dialog box
                                           Navigator.of(context).pop();
                                         }),
                                   )
