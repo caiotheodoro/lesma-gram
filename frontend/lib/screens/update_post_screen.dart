@@ -9,6 +9,8 @@ import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/utils/colors.dart';
 import 'package:frontend/utils/utils.dart';
 import 'package:frontend/widgets/follow_button.dart';
+import 'package:frontend/responsive/mobile_screen_layout.dart';
+import 'package:frontend/responsive/web_screen_layout.dart';
 
 class UpdatePostScreen extends StatefulWidget {
   final Post post;
@@ -119,7 +121,16 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
         SnackBar(content: Text('Post removido com sucesso')),
       );
 
-      Navigator.pop(context);
+      Future.delayed(Duration(seconds: 1), () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
+            ),
+          ),
+        );
+      });
     } else {
       setState(() {
         isLoading = false;
