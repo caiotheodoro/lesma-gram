@@ -33,4 +33,34 @@ class StorageMethods {
       throw Exception(e.toString());
     }
   }
+
+  // Método para obter a URL da imagem
+  Future<String> getImageUrl(String imageId) async {
+    try {
+      final response = await http.get(Uri.parse('$apiUrl/image/$imageId'));
+
+      if (response.statusCode == 200) {
+        return response.body; // Espera que a API retorne a URL da imagem
+      } else {
+        throw Exception('Failed to get image URL');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  // Método para obter a URL do post
+  Future<String> postUrl(String postId) async {
+    try {
+      final response = await http.get(Uri.parse('$apiUrl/post/$postId'));
+
+      if (response.statusCode == 200) {
+        return response.body; // Espera que a API retorne a URL do post
+      } else {
+        throw Exception('Failed to get post URL');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
