@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend/resources/ApiMethods.dart';
 import 'package:frontend/resources/AuthMethods.dart';
 import 'package:frontend/utils/colors.dart'; // Certifique-se de importar o AuthMethods corretamente
+import 'package:frontend/widgets/follow_button.dart';
+import 'package:frontend/responsive/mobile_screen_layout.dart';
+import 'package:frontend/responsive/web_screen_layout.dart';
+import 'package:frontend/responsive/responsive_layout_screen.dart';
 
 class UpdateUserScreen extends StatefulWidget {
   const UpdateUserScreen({Key? key}) : super(key: key);
@@ -116,6 +120,15 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
                     const SnackBar(
                         content: Text(
                             'Suas informações foram editadas com sucesso')),
+                  );
+
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => ResponsiveLayout(
+                        mobileScreenLayout: MobileScreenLayout(),
+                        webScreenLayout: WebScreenLayout(),
+                      ),
+                    ),
                   );
                 } else {
                   // Show error message
