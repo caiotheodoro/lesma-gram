@@ -85,11 +85,11 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
 
       Future.delayed(Duration(seconds: 1), () {
         Navigator.of(context).pop();
-        Navigator.pushReplacement(
-          context,
+        Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => ProfileScreen(
-              id: Future.value(userId!),
+            builder: (context) => ResponsiveLayout(
+              mobileScreenLayout: MobileScreenLayout(),
+              webScreenLayout: WebScreenLayout(),
             ),
           ),
         );
