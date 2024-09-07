@@ -314,8 +314,8 @@ class ApiMethods {
     }
   }
 
-  Future<String> updateUser(
-      String id, String name, String email, String password, bool isAnonymous) async {
+  Future<String> updateUser(String id, String name, String email,
+      String currentPassword, String password, bool isAnonymous) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('authToken');
 
@@ -330,6 +330,7 @@ class ApiMethods {
           {
             'name': name,
             'email': email,
+            'currentPassword': currentPassword,
             'password': password,
             'isAnonymous': isAnonymous,
           },
@@ -337,9 +338,11 @@ class ApiMethods {
       );
 
       if (response.statusCode == 200) {
-        return "success";
+        return "Sucesso";
+      } else if (response.statusCode == 400) {
+        return "Senha incorreta";
       } else {
-        return "Failed to update user";
+        return "Falha ao atualizar usuário";
       }
     } catch (err) {
       return err.toString();
