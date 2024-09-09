@@ -91,13 +91,24 @@ export class UserController {
   update = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const { name, email, password, isAnonymous } = req.body;
+      const { name, email, currentPassword, password, isAnonymous } = req.body;
 
-      const hash = await bcrypt.hash(password, 10);
-      const updateUserDTO: UpdateUserDTO = { id, name, email, password: hash };
-      await this.userRepository.updateUser(updateUserDTO);
-      await this.userRepository.updateUserSettings(id, isAnonymous);
-      res.json({ message: "User Atualizada com sucesso" });
+      const user = await this.userRepository.getUserById(id);
+
+      if (await bcrypt.compare(currentPassword, user.password)) {
+        const hash = await bcrypt.hash(password, 10);
+        const updateUserDTO: UpdateUserDTO = {
+          id,
+          name,
+          email,
+          password: hash,
+        };
+        await this.userRepository.updateUser(updateUserDTO);
+        await this.userRepository.updateUserSettings(id, isAnonymous);
+        res.json({ message: "User Atualizada com sucesso" });
+      } else {
+        res.status(400).json({ message: "Senha atual incorreta" });
+      }
     } catch (error) {
       res.status(500).json({ message: "Erro Interno!" });
     }
