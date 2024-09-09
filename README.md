@@ -24,6 +24,6 @@ Isso irá instalar todas as dependências necessárias para o projeto.
 Executando o Projeto
 Para rodar o aplicativo, utilize o comando:
 
-flutter run
+```flutter run```
 
 
