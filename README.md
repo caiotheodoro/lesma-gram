@@ -17,7 +17,7 @@ Certifique-se de ter o Flutter instalado na sua máquina.
 Instalação de Dependências
 Após clonar o repositório, navegue até o diretório do projeto e execute:
 
-flutter pub get
+```flutter pub get```
 
 Isso irá instalar todas as dependências necessárias para o projeto.
 
