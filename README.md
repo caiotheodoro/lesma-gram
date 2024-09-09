@@ -1,19 +1,29 @@
-# prog-movel-prod
+# 🐌 Rede Social da Lesma
+Uma nova rede social aberta a todos os nichos! 🌍
 
-# gerenciador de tarefas
-# Consumo de conteudo 
+Os usuários podem:
 
+🖼️ Postar fotos
+👍 Curtir publicações de outros
+🔍 Pesquisar perfis
+✏️ Editar ou 🗑️ deletar suas postagens
+👤 Visualizar perfis de outros usuários
+A plataforma também oferece a opção de manter um perfil anônimo 🕵️‍♂️, sem a necessidade de escolher um nome de usuário.
 
-## USUARIOS
+# 🚀 Para o frontend
+Pré-requisitos
+Certifique-se de ter o Flutter instalado na sua máquina.
 
-- Tipos de acesso: administrador, consumidor (cliente), criador de conteudo.
-- Tipos de conteudo: Imagem e texto.
-- Funcionalidade do usuario:
-  - Consumo de conteudo (READ)
-  - Botao de feedback
-  - ...
-- Funcionalidades do criador de conteudo:
-  - CRUD de conteudos (CRUD)
+Instalação de Dependências
+Após clonar o repositório, navegue até o diretório do projeto e execute:
 
-- Segmentacao (opcional)
+flutter pub get
+
+Isso irá instalar todas as dependências necessárias para o projeto.
+
+Executando o Projeto
+Para rodar o aplicativo, utilize o comando:
+
+flutter run
+
 
