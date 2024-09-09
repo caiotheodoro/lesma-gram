@@ -4,10 +4,7 @@ import 'package:frontend/models/Post.dart';
 import 'package:frontend/resources/ApiMethods.dart';
 import 'package:frontend/resources/AuthMethods.dart';
 import 'package:frontend/responsive/responsive_layout_screen.dart';
-import 'package:frontend/screens/feed_screen.dart';
-import 'package:frontend/screens/profile_screen.dart';
 import 'package:frontend/utils/colors.dart';
-import 'package:frontend/utils/utils.dart';
 import 'package:frontend/widgets/follow_button.dart';
 import 'package:frontend/responsive/mobile_screen_layout.dart';
 import 'package:frontend/responsive/web_screen_layout.dart';
@@ -33,6 +30,7 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
     super.initState();
     fetchUserData();
     fetchPostData();
+    _updateImagePreview();
   }
 
   Future<void> fetchUserData() async {
@@ -64,6 +62,9 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
     if (_imageLinkController.text.isEmpty ||
         _descriptionController.text.isEmpty ||
         userId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Descrição é obrigatória')),
+      );
       return;
     }
 
@@ -162,19 +163,6 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      TextField(
-                        controller: _imageLinkController,
-                        decoration: const InputDecoration(
-                          labelText: 'Link da imagem',
-                          border: OutlineInputBorder(),
-                          filled: true, // Adiciona preenchimento
-                          fillColor: tertiaryColor,
-                        ),
-                        onChanged: (value) {
-                          _updateImagePreview();
-                        },
-                      ),
-                      const SizedBox(height: 10),
                       TextField(
                         controller: _descriptionController,
                         decoration: const InputDecoration(
