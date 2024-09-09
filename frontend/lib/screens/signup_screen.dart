@@ -36,6 +36,40 @@ class _SignupScreenState extends State<SignupScreen> {
       _isLoading = true;
     });
 
+    if (_nameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nome do usuário é obrigatório')),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    } if (_emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email é obrigatório')),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    } if (_passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Senha é obrigatório')),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    } if (_confirmPasswordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Confirmar senha é obrigatório')),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
     if (_passwordController.text != _confirmPasswordController.text) {
       showSnackBar("As senhas não coincidem", context);
       setState(() {
@@ -43,8 +77,6 @@ class _SignupScreenState extends State<SignupScreen> {
       });
       return;
     }
-
-    print(_nameController.text);
 
     String res = await AuthMethods().signUpUser(
         email: _emailController.text,
