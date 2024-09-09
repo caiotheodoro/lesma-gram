@@ -157,20 +157,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: _imageLinkController,
-                        decoration: const InputDecoration(
-                          labelText: 'Link da imagem',
-                          border: OutlineInputBorder(),
-                          filled: true,
-                          fillColor: tertiaryColor,
-                        ),
-                        onChanged: (value) {
-                          _updateImagePreview();
-                        },
-                      ),
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: _pickImage,
