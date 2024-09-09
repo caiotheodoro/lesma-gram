@@ -53,6 +53,27 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
     String password = _passwordController.text;
     String confirmPassword = _confirmPasswordController.text;
 
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nome é obrgatório')),
+      );
+      return;
+    } if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email é obrgatório')),
+      );
+      return;
+    } if ((password.isNotEmpty && confirmPassword.isNotEmpty) && currentPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Senha atual é obrgatório')),
+      );
+      return;
+    } if ((password.isEmpty && confirmPassword.isEmpty) && currentPassword.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Nova senha é obrigatória')),
+      );
+      return;
+    }
     if (password == confirmPassword) {
       var updated = await ApiMethods()
           .updateUser(id, name, email, currentPassword, password, _isAnonymous);
